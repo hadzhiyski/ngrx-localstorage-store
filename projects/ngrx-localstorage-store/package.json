@@ -1,6 +1,15 @@
 {
   "name": "ngrx-localstorage-store",
-  "version": "0.0.1",
+  "version": "1.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/hadzhiyski/ngrx-localstorage-store"
+  },
+  "author": {
+    "name": "Vladislav Hadzhiyski",
+    "email": "vladislav.hadzhiyski@gmail.com",
+    "url": "https://github.com/hadzhiyski"
+  },
   "peerDependencies": {
     "@angular/common": "^9.1.1",
     "@angular/core": "^9.1.1",
