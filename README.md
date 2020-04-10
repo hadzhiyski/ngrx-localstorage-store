@@ -1,0 +1,1 @@
+# ngrx-localstorage-store
