@@ -15,7 +15,9 @@ export const APP_PREFIX = new InjectionToken<string>(
   }
 );
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class LocalStorageService {
   constructor(@Inject(APP_PREFIX) private appPrefix: string) {}
 
