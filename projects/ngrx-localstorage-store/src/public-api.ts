@@ -2,6 +2,6 @@
  * Public API Surface of ngrx-localstorage-store
  */
 
-export * from './lib/ngrx-localstorage-store.service';
-export * from './lib/ngrx-localstorage-store.component';
-export * from './lib/ngrx-localstorage-store.module';
+export * from './lib/ngrx-local-storage-store.module';
+export * from './lib/services/local-storage.service';
+export * from './lib/reducers/init-state-from-localstorage.reducer';
