@@ -1,4 +1,4 @@
-import { InjectionToken, Inject, Injectable, inject } from '@angular/core';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
 
 const STATE_PREFIX = 'state';
 export const DEFAULT_APP_PREFIX = 'app';
@@ -21,11 +21,8 @@ export const APP_PREFIX = new InjectionToken<string>(
 export class LocalStorageService {
   constructor(@Inject(APP_PREFIX) private appPrefix: string) {}
 
-  static loadInitialState(
-    appPrefix: string = DEFAULT_APP_PREFIX,
-    feature?: string
-  ): any {
-    const key = this.getLocalStorageKey(appPrefix, feature);
+  loadInitialState(feature?: string): any {
+    const key = this.getLocalStorageKey(this.appPrefix, feature);
     const item = localStorage.getItem(key);
     if (item) {
       return JSON.parse(item);
@@ -34,7 +31,7 @@ export class LocalStorageService {
     return {};
   }
 
-  private static getLocalStorageKey(
+  private getLocalStorageKey(
     appPrefix: string,
     feature?: string
   ): string {
@@ -47,7 +44,7 @@ export class LocalStorageService {
   }
 
   set(feature: string | undefined, value: any) {
-    const key = LocalStorageService.getLocalStorageKey(this.appPrefix, feature);
+    const key = this.getLocalStorageKey(this.appPrefix, feature);
     localStorage.setItem(key, JSON.stringify(value));
   }
 }

@@ -9,7 +9,7 @@ import {
 } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap, withLatestFrom } from 'rxjs/operators';
-import { LocalStorageService } from '../services/local-storage.service';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
