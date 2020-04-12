@@ -1,0 +1,13 @@
+<div class="actions">
+  <button mat-icon-button (click)="add()">
+    <span class="material-icons">
+      add
+    </span>
+  </button>
+  <button mat-icon-button (click)="subtract()">
+    <span class="material-icons">
+      remove
+    </span>
+  </button>
+</div>
+<h1>Count: {{ count$ | async }}</h1>

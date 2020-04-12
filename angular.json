@@ -163,6 +163,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ngrx-localstorage-store"
+    }
+  },
+  "defaultProject": "ngrx-localstorage-store",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
