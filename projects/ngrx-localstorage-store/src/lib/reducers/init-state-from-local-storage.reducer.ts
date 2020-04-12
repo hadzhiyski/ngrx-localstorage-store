@@ -7,7 +7,7 @@ export function getLocalStorageMetaReducerForFeature<TState>(feature: string) {
     return (state, action) => {
       const newState = reducer(state, action);
       if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
-        return { ...newState, ...LocalStorageService.loadInitialState(feature) };
+        return { ...newState, ...LocalStorageService.loadInitialState(undefined, feature) };
       }
       return newState;
     };

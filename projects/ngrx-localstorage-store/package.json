@@ -14,6 +14,8 @@
     "@angular/common": "^9.1.1",
     "@angular/core": "^9.1.1",
     "@ngrx/store": "^9.1.0",
+    "@ngrx/effects": "^9.1.0",
+    "rxjs": "~6.5.4",
     "tslib": "^1.10.0"
   }
 }
