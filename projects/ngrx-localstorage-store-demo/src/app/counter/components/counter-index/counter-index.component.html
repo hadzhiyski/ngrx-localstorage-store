@@ -1,13 +1,20 @@
-<div class="actions">
-  <button mat-icon-button (click)="add()">
-    <span class="material-icons">
-      add
-    </span>
-  </button>
-  <button mat-icon-button (click)="subtract()">
-    <span class="material-icons">
-      remove
-    </span>
-  </button>
-</div>
-<h1>Count: {{ count$ | async }}</h1>
+<mat-card class="counter-card">
+  <mat-card-title class="counter-card-title">Counter</mat-card-title>
+  <mat-card-content>
+    <div class="counter-card-container">
+      <span class="mat-display-4">{{ count$ | async }}</span>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-icon-button (click)="add()">
+      <span class="material-icons">
+        add
+      </span>
+    </button>
+    <button mat-icon-button (click)="subtract()">
+      <span class="material-icons">
+        remove
+      </span>
+    </button>
+  </mat-card-actions>
+</mat-card>

@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
@@ -16,12 +17,15 @@ import * as fromCounter from './store/reducers/counter.reducer';
     CommonModule,
 
     MatButtonModule,
+    MatCardModule,
     MatIconModule,
 
     CounterRoutingModule,
     StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
       metaReducers: [
-        getLocalStorageMetaReducerForFeature<fromCounter.ICounterState>(fromCounter.counterFeatureKey),
+        getLocalStorageMetaReducerForFeature<fromCounter.ICounterState>(
+          fromCounter.counterFeatureKey
+        ),
       ],
     }),
     EffectsModule.forFeature([CounterEffects]),

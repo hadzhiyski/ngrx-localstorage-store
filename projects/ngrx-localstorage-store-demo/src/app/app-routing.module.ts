@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes, PreloadAllModules } from '@angular/router';
+import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
@@ -7,6 +7,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./counter/counter.module').then((m) => m.CounterModule),
   },
+  {
+    path: 'form',
+    loadChildren: () =>
+    import('./contact-form/contact-form.module').then(m => m.ContactFormModule),
+  }
 ];
 
 @NgModule({

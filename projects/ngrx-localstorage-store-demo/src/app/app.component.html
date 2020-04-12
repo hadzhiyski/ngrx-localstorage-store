@@ -1,9 +1,10 @@
 <header>
   <mat-toolbar color="primary">
-    <h1>ngrx localstorage demo</h1>
+    <h1 class="title" [routerLink]="'/'">ngrx localstorage demo</h1>
     <span class="menu-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'/counter'"> Counter </a>
+      <a mat-button [routerLink]="'/counter'">Counter</a>
+      <a mat-button [routerLink]="'/form'">Contact Form</a>
     </div>
   </mat-toolbar>
 </header>

@@ -1,3 +1,11 @@
 .menu-spacer {
   flex: 1 1 auto;
 }
+
+header .title:hover {
+  cursor: pointer;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10+ and Edge */
+  user-select: none; /* Standard syntax */
+}

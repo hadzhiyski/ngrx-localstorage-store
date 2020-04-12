@@ -30,3 +30,9 @@ $ngrx-localstorage-store-demo-theme: mat-light-theme($ngrx-localstorage-store-de
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+* {
+  &:active,
+  :focus {
+    outline: none !important;
+  }
+}

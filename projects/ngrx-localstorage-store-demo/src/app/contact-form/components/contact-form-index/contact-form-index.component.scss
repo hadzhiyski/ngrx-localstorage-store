@@ -6,8 +6,17 @@
   margin-top: 3em;
 }
 
-.counter-card {
-  width: 300px;
+.contact-form {
+  &-first-name-field,
+  &-last-name-field,
+  &-email-field,
+  &-message-field {
+    width: 100%;
+  }
+}
+
+.contact-form-card {
+  width: 500px;
   &-title {
     text-align: center;
   }
