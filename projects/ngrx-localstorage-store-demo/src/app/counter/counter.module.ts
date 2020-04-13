@@ -24,6 +24,7 @@ import * as fromCounter from './store/reducers/counter.reducer';
     StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
       metaReducers: [
         getLocalStorageMetaReducerForFeature<fromCounter.ICounterState>(
+          'ngrx-localstorage-store-demo',
           fromCounter.counterFeatureKey
         ),
       ],

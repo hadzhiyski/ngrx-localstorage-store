@@ -10,6 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { APP_PREFIX } from 'ngrx-localstorage-store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +32,12 @@ import { AppComponent } from './app.component';
       logOnly: environment.production,
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_PREFIX,
+      useValue: 'ngrx-localstorage-store-demo'
+    }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

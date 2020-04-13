@@ -30,7 +30,7 @@ import {getLocalStorageMetaReducerForFeature} from 'ngrx-localstorage-store';
       fromContactForm.contactFormFeatureKey,
       fromContactForm.reducer, {
         metaReducers: [
-          getLocalStorageMetaReducerForFeature(fromContactForm.contactFormFeatureKey)
+          getLocalStorageMetaReducerForFeature('ngrx-localstorage-store-demo', fromContactForm.contactFormFeatureKey)
         ]
       }
     ),
