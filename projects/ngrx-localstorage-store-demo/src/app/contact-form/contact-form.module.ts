@@ -11,7 +11,7 @@ import { ContactFormIndexComponent } from './components/contact-form-index/conta
 import { ContactFormRoutingModule } from './contact-form-routing.module';
 import { ContactFormEffects } from './store/effects/contact-form.effects';
 import * as fromContactForm from './store/reducers/contact-form.reducer';
-import {getLocalStorageMetaReducerForFeature} from 'ngrx-localstorage-store';
+import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
 
 @NgModule({
   declarations: [ContactFormIndexComponent],
@@ -28,10 +28,14 @@ import {getLocalStorageMetaReducerForFeature} from 'ngrx-localstorage-store';
     ContactFormRoutingModule,
     StoreModule.forFeature(
       fromContactForm.contactFormFeatureKey,
-      fromContactForm.reducer, {
+      fromContactForm.reducer,
+      {
         metaReducers: [
-          getLocalStorageMetaReducerForFeature('ngrx-localstorage-store-demo', fromContactForm.contactFormFeatureKey)
-        ]
+          StateLocalStorageLoader.forFeature<fromContactForm.IContactFormState>(
+            'ngrx-localstorage-store-demo',
+            fromContactForm.contactFormFeatureKey
+          ),
+        ],
       }
     ),
     EffectsModule.forFeature([ContactFormEffects]),

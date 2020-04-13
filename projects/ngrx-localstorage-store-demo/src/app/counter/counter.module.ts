@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { getLocalStorageMetaReducerForFeature } from 'ngrx-localstorage-store';
+import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
 import { CounterIndexComponent } from './components/counter-index/counter-index.component';
 import { CounterRoutingModule } from './counter-routing.module';
 import { CounterEffects } from './store/effects/counter.effects';
@@ -23,7 +23,7 @@ import * as fromCounter from './store/reducers/counter.reducer';
     CounterRoutingModule,
     StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
       metaReducers: [
-        getLocalStorageMetaReducerForFeature<fromCounter.ICounterState>(
+        StateLocalStorageLoader.forFeature<fromCounter.ICounterState>(
           'ngrx-localstorage-store-demo',
           fromCounter.counterFeatureKey
         ),
