@@ -31,6 +31,11 @@ export class LocalStorageService {
     return {};
   }
 
+  set(feature: string | undefined, value: any) {
+    const key = this.getLocalStorageKey(this.appPrefix, feature);
+    localStorage.setItem(key, JSON.stringify(value));
+  }
+
   private getLocalStorageKey(
     appPrefix: string,
     feature?: string
@@ -41,10 +46,5 @@ export class LocalStorageService {
     }
 
     return key;
-  }
-
-  set(feature: string | undefined, value: any) {
-    const key = this.getLocalStorageKey(this.appPrefix, feature);
-    localStorage.setItem(key, JSON.stringify(value));
   }
 }

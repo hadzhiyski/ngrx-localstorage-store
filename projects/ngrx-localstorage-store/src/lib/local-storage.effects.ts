@@ -40,4 +40,19 @@ export class LocalStorageEffects<TState> {
       { dispatch: false }
     );
   }
+
+  saveForRoot(
+    actions$: Actions
+  ): Observable<[Action, TState]> & CreateEffectMetadata {
+    return createEffect(
+      () =>
+        actions$.pipe(
+          withLatestFrom(this.store),
+          tap(([action, state]) =>
+            this.localStorageService.set(undefined, state)
+          )
+        ),
+      { dispatch: false }
+    );
+  }
 }
