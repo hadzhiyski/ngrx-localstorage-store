@@ -1,27 +1,101 @@
-# NgrxLocalstorageStore
+# ngrx-localstorage-store
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
+## Installation
+  Not yet publish on npm. Development in progress
 
-## Development server
+## Dependencies
+  - [@angular/common@9.1.1](https://www.npmjs.com/package/@angular/common/v/9.1.1)
+  - [@angular/core@9.1.1](https://www.npmjs.com/package/@angular/core/v/9.1.1)
+  - [@ngrx/store@9.1.0](https://www.npmjs.com/package/@ngrx/store/v/9.1.0)
+  - [@ngrx/effects@9.1.0](https://www.npmjs.com/package/@ngrx/effects/v/9.1.0)
+  - [rxjs@6.5.4](https://www.npmjs.com/package/rxjs/v/6.5.4)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Getting Started
 
-## Code scaffolding
+### Set AppPrefix (optional)
+The app prefix will be used to generate new localStorage keys
+``` typescript
+@NgModule({
+  providers: [
+    {
+      provide: APP_PREFIX,
+      useValue: 'ngrx-localstorage-store-demo'
+    }
+  ]
+})
+export class AppModule {}
+```
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Register localStorage loader
 
-## Build
+#### For Root
+``` typescript
+import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+@NgModule({
+  imports: [
+    StoreModule.forRoot(rootReducers, {
+      metaReducers: [
+            StateLocalStorageLoader.forRoot<IAppState>(
+            'ngrx-localstorage-store-demo'
+          ),
+      ]
+    }),
+  ],
+  providers: [
+    {
+      provide: APP_PREFIX,
+      useValue: 'ngrx-localstorage-store-demo'
+    }
+  ]
+})
+export class AppModule {}
+```
 
-## Running unit tests
+#### For Feature
+``` typescript
+import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
+import * as fromCounter from './store/reducers/counter.reducer';
+@NgModule({
+  imports: [
+    StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
+      metaReducers: [
+        StateLocalStorageLoader.forFeature<fromCounter.ICounterState>(
+          'ngrx-localstorage-store-demo',
+          fromCounter.counterFeatureKey
+        ),
+      ],
+    }),
+  ],
+})
+export class CounterModule {}
+```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Save state to localStorage effects
+You could save your state to localStorage via `@ngrx/effects`
 
-## Running end-to-end tests
+``` typescript
+import { LocalStorageEffects } from 'ngrx-localstorage-store';
+import { counterFeatureKey, ICounterState } from '../reducers/counter.reducer';
+import { selectCounterState } from '../selectors/counter.selectors';
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+@Injectable()
+export class CounterEffects {
+  saveToLocalStorage$ = this.localStorageEffects.saveForFeature(
+    this.actions$,
+    counterFeatureKey,
+    selectCounterState
+  );
 
-## Further help
+  constructor(
+    private actions$: Actions,
+    private localStorageEffects: LocalStorageEffects<ICounterState>
+  ) {}
+}
+```
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### Examples & use cases
+Take a look into the `ngrx-localstorage-store-demo` application
+
+## License
+Licensed to [Apache-2.0](https://www.apache.org/licenses/LICENSE-2.0)
