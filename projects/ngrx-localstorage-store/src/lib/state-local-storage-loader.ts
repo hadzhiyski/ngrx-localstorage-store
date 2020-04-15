@@ -1,17 +1,16 @@
-import { Injector } from '@angular/core';
 import { ActionReducer, INIT, UPDATE } from '@ngrx/store';
+import { AppInjectorRef } from './app-injector-ref';
 import { APP_PREFIX, LocalStorageService } from './local-storage.service';
 
 export class StateLocalStorageLoader {
-  static forFeature<TState>(
-    appPrefix: string,
-    feature: string
-  ) {
+  static forFeature<TState>(feature: string, appPrefix?: string) {
     return (reducer: ActionReducer<TState>): ActionReducer<TState> => {
       return (state, action) => {
         const newState = reducer(state, action);
         if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
-          const localStorageService = StateLocalStorageLoader.getLocalStorageService(appPrefix);
+          const localStorageService = StateLocalStorageLoader.getLocalStorageService(
+            appPrefix
+          );
           return {
             ...newState,
             ...localStorageService.loadInitialState(feature),
@@ -22,12 +21,14 @@ export class StateLocalStorageLoader {
     };
   }
 
-  static forRoot<TState>(appPrefix: string) {
+  static forRoot<TState>(appPrefix?: string) {
     return (reducer: ActionReducer<TState>): ActionReducer<TState> => {
       return (state, action) => {
         const newState = reducer(state, action);
         if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
-          const localStorageService = StateLocalStorageLoader.getLocalStorageService(appPrefix);
+          const localStorageService = StateLocalStorageLoader.getLocalStorageService(
+            appPrefix
+          );
           return {
             ...newState,
             ...localStorageService.loadInitialState(),
@@ -38,14 +39,17 @@ export class StateLocalStorageLoader {
     };
   }
 
-  private static getLocalStorageService(appPrefix: string): LocalStorageService {
-    const injector = Injector.create({
-      providers: [
+  private static getLocalStorageService(
+    appPrefix?: string
+  ): LocalStorageService {
+    let providers;
+    if (!!appPrefix) {
+      providers = [
         { provide: APP_PREFIX, useValue: appPrefix },
         { provide: LocalStorageService },
-      ],
-    });
-
-    return injector.get(LocalStorageService);
+      ];
+      AppInjectorRef.withProviders(providers);
+    }
+    return AppInjectorRef.get(LocalStorageService, undefined, undefined);
   }
 }

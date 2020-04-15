@@ -32,7 +32,6 @@ import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
       {
         metaReducers: [
           StateLocalStorageLoader.forFeature<fromContactForm.IContactFormState>(
-            'ngrx-localstorage-store-demo',
             fromContactForm.contactFormFeatureKey
           ),
         ],

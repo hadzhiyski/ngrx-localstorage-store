@@ -33,6 +33,19 @@ The app prefix will be used to generate new localStorage keys
 export class AppModule {}
 ```
 
+### Using AppModule injector
+You could use the main injector of you app to help the `ngrx-localstorage-store` library to use your DI.
+This way, the app prefix parameters are optional. Simply you need to modify your `main.ts` file with the following code
+
+``` typescript
+import { AppInjectorRef } from 'ngrx-localstorage-store';
+
+platformBrowserDynamic()
+  .bootstrapModule(AppModule)
+  .then((moduleRef) => AppInjectorRef.set(moduleRef.injector))
+  .catch((err) => console.error(err));
+```
+
 ### Register localStorage loader
 
 #### For Root
@@ -44,7 +57,7 @@ import { StateLocalStorageLoader } from 'ngrx-localstorage-store';
     StoreModule.forRoot(rootReducers, {
       metaReducers: [
             StateLocalStorageLoader.forRoot<IAppState>(
-            'ngrx-localstorage-store-demo'
+            'ngrx-localstorage-store-demo' // optional if you use AppModule injector
           ),
       ]
     }),
@@ -68,7 +81,7 @@ import * as fromCounter from './store/reducers/counter.reducer';
     StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
       metaReducers: [
         StateLocalStorageLoader.forFeature<fromCounter.ICounterState>(
-          'ngrx-localstorage-store-demo',
+          'ngrx-localstorage-store-demo', // optional if you use AppModule injector
           fromCounter.counterFeatureKey
         ),
       ],
